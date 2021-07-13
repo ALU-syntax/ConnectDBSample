@@ -1,7 +1,9 @@
 package com.example.connectdbsample.Adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,24 +15,49 @@ import com.example.connectdbsample.R;
 
 import java.util.List;
 
-public class AdapterData{
+public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData>{
     private Context ctx;
-    private List<DataModel> listHotel;
+    private List<DataModel> listData;
 
-    public AdapterData(Context ctx, List<DataModel> listHotel) {
+    public AdapterData(Context ctx, List<DataModel> listData) {
         this.ctx = ctx;
-        this.listHotel = listHotel;
+        this.listData = listData;
+    }
+
+    @NonNull
+    @Override
+    public HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+        HolderData holder = new HolderData(layout);
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AdapterData.HolderData holder, int position) {
+        DataModel dm = listData.get(position);
+        
+        holder.tvId.setText(String.valueOf(dm.getId()));
+        holder.tvNama.setText(dm.getNama());
+        holder.tvAlamat.setText(dm.getAlamat());
+        holder.tvTelepon.setText(dm.getTelepon());
+    }
+
+    @Override
+    public int getItemCount() {
+        return listData.size();
     }
 
     public class HolderData extends RecyclerView.ViewHolder{
-        View itemView;
-        TextView tvNama, tvAlamat, tvTelepon;
-        TextViewCompat tvTest;
+        TextView tvId, tvNama, tvAlamat, tvTelepon;
 
         public HolderData(@NonNull View itemView){
             super(itemView);
 
+            tvId = itemView.findViewById(R.id.tv_id);
             tvNama = itemView.findViewById(R.id.tv_nama);
+            tvAlamat = itemView.findViewById(R.id.tv_alamat);
+            tvTelepon = itemView.findViewById(R.id.tv_telepon);
+
         }
     }
 }
