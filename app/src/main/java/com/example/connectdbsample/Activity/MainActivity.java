@@ -1,8 +1,10 @@
-package com.example.connectdbsample;
+package com.example.connectdbsample.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.connectdbsample.R;
 
 public class MainActivity extends AppCompatActivity {
 
